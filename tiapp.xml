@@ -50,14 +50,14 @@
       <extension projectPath="extensions/WatchOS2/WatchOS2.xcodeproj">
         <target name="WatchOS2 WatchApp Extension">
           <provisioning-profiles>
-            <device>fa04ed5e-a4db-4258-bbba-0fffb5ca0f84</device>
+            <device/>
             <dist-appstore/>
             <dist-adhoc/>
           </provisioning-profiles>
         </target>
         <target name="WatchOS2 WatchApp">
           <provisioning-profiles>
-            <device>fa04ed5e-a4db-4258-bbba-0fffb5ca0f84</device>
+            <device/>
             <dist-appstore/>
             <dist-adhoc/>
           </provisioning-profiles>
