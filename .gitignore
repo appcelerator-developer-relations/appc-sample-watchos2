@@ -1,0 +1,12 @@
+.DS_Store
+Resources
+build.log
+build
+npm-debug.log
+tmp
+.map
+.project
+.settings
+Thumbs.db
+extensions/WatchOS2/WatchOS2.xcodeproj/xcuserdata
+extensions/WatchOS2/WatchOS2.xcodeproj/project.xcworkspace
