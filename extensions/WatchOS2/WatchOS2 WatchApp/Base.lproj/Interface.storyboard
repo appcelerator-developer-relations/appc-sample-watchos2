@@ -10,6 +10,10 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController">
                     <items>
+                        <label width="1" alignment="center" text="Watch for Logs" textAlignment="center" numberOfLines="0" id="LHM-6g-e2O">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
                         <imageView alignment="center" verticalAlignment="bottom" id="Kuf-f0-rzw"/>
                         <button width="1" alignment="center" verticalAlignment="bottom" title="sendMessage" id="8al-Pv-z3a">
                             <fontDescription key="font" type="system" pointSize="14"/>
@@ -23,10 +27,6 @@
                                 <action selector="transferFile:" destination="AgC-eL-Hgc" id="e4V-XB-UMR"/>
                             </connections>
                         </button>
-                        <label width="1" alignment="center" text="Watch for Logs" textAlignment="center" numberOfLines="0" id="LHM-6g-e2O">
-                            <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
-                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                        </label>
                         <button width="1" alignment="center" verticalAlignment="bottom" title="transferUserInfo" id="NU6-xy-Z4C">
                             <fontDescription key="font" type="system" pointSize="14"/>
                             <connections>

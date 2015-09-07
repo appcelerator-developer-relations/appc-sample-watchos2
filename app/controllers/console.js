@@ -7,21 +7,24 @@ var log = require('log');
  */
 (function constructor(args) {
 
-	// Show logs from before this controller was created
+	// Show logs we have until now
 	showHistory();
 
-	// Fired in alloy.js when new logs are added
+	// Listen for new logs
 	log.on('change', showHistory);
 
 })(arguments[0] || {});
 
 /**
- * Shows the logs collected in a global var by alloy.js
+ * Shows the log history in the TextArea
  */
 function showHistory() {
 	$.log.value = log.history;
 }
 
+/**
+ * Clear the history
+ */
 function clearHistory() {
 	log.history = '';
 

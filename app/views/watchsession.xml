@@ -8,6 +8,8 @@
 
 			<ScrollView layout="vertical">
 
+				<!-- Ti.WatchSession properties, click to update -->
+
 				<Label class="label" onClick="showProperty">isSupported</Label>
 				<Label class="value" id="isSupported">undefined</Label>
 
@@ -25,6 +27,8 @@
 
 				<Label class="label" onClick="showProperty">recentApplicationContext</Label>
 				<Label class="value" id="recentApplicationContext">undefined</Label>
+
+				<!-- Ti.WatchSession methods -->
 
 				<Button onClick="sendMessage">sendMessage()</Button>
 

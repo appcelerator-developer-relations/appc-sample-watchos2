@@ -9,10 +9,10 @@
 #import <WatchKit/WatchKit.h>
 #import <Foundation/Foundation.h>
 
-// Import the lib to connect with the Titanium app
+// Import the WatchConnectivity Framework
 #import <WatchConnectivity/WatchConnectivity.h>
 
-// Add <WCSessionDelegate>
+// Add the <WCSessionDelegate>
 @interface InterfaceController : WKInterfaceController <WCSessionDelegate> {
     WCSession *watchSession;
     
@@ -25,7 +25,7 @@
 @property (strong, nonatomic) IBOutlet WKInterfaceLabel *logText;
 @property (strong, nonatomic) IBOutlet WKInterfaceImage *logImage;
 
-// Public methods
+// Public methods the UI uses
 -(IBAction)sendMessage:(id)sender;
 -(IBAction)transferFile:(id)sender;
 -(IBAction)transferUserInfo:(id)sender;

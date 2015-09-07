@@ -46,6 +46,8 @@
         <string>UIStatusBarStyleLightContent</string>
       </dict>
     </plist>
+
+    <!-- This gets added by "appc new --type applewatch" -->
     <extensions>
       <extension projectPath="extensions/WatchOS2/WatchOS2.xcodeproj">
         <target name="WatchOS2 WatchApp Extension">
@@ -64,6 +66,7 @@
         </target>
       </extension>
     </extensions>
+
   </ios>
   <android xmlns:android="http://schemas.android.com/apk/res/android">
   </android>

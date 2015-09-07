@@ -1,10 +1,15 @@
 <Alloy>
+
+	<!-- The mask, click to close -->
 	<Window id="win" onClick="close">
 
+		<!-- The black box, scrollable -->
 		<ScrollView id="wrap">
 
+			<!-- Log message -->
 			<Label id="message" />
 
+			<!-- White wrap for optional image -->
 			<View id="imageWrap">
 				<ImageView id="image" />
 			</View>

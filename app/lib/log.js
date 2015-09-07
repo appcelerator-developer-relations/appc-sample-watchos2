@@ -2,24 +2,23 @@
 
 var moment = require('alloy/moment');
 
+// Current instance of the notification controller
 var notification;
 
+// Make our CommonJS module a Backbone Event dispatcher
 var Log = module.exports = _.extend({}, Backbone.Events);
 
-/**
- * Global function to format logs, emit an event and log it to the console.
- *
- * Takes any number of and type of arguments.
- */
-
+// History of all log messages
 Log.history = '';
 
+// Log any number of arguments
 Log.args = function () {
 	log({
 		args: Array.prototype.slice.call(arguments)
 	});
 };
 
+// Log any number of arguments, without showing a notification
 Log.argsSilent = function () {
 	log({
 		args: Array.prototype.slice.call(arguments),
@@ -27,6 +26,7 @@ Log.argsSilent = function () {
 	});
 };
 
+// Log any number of arguments of which the last is an image
 Log.argsWithImage = function () {
 	var args = Array.prototype.slice.call(arguments);
 	var image = args.pop();
@@ -37,6 +37,7 @@ Log.argsWithImage = function () {
 	});
 };
 
+// The actual log method
 function log(opts) {
 	var args = opts.args,
 		image = opts.image,
@@ -52,6 +53,7 @@ function log(opts) {
 	// Use error-level for production or they will not show in Xcode console
 	console[ENV_PROD ? 'error' : 'info'](message);
 
+	// Show the notification
 	if (!silent) {
 		notification && notification.close();
 
@@ -61,9 +63,9 @@ function log(opts) {
 		});
 	}
 
-	// Add the message to a global variable for controllers/console.js to use
+	// Keep track of all received log messages
 	Log.history = (Log.history || '') + '[' + moment().format('HH:mm:ss.SS') + '] ' + message + '\n\n';
 
-	// Trigger an event for controllers/console.js to listen to and display the log
+	// Trigger an event so listeners know we have new logs to show
 	Log.trigger('change');
 }
