@@ -1,16 +1,16 @@
 # WatchSession
 *Communicating between a Titanium App and a Xcode watchOS 2 App.*
 
-Titanium 5.0.0 adds support for bundling and communicating with an Xcode built watchOS 2 App. I will walk you through adding and launching a Watch App for your own Titanium apps and then use the example to explain how you can communicate between them.
+Among lots of other enhancements, Titanium 5.0.0 adds support for bundling and communicating with an Xcode-built watchOS 2 app. I'll walk you through adding and launching a Watch app for your own Titanium apps and then use the example to explain how you can communicate between them.
 
 ![screenshots](docs/watchsession_screenshots.png)
 
 ## Architecture of watchOS2
-But first, please make yourself familiar with the architecture of watchOS 2 and the difference with watchOS 1. Apple has an excellent [WatchKit Programming Guide](https://developer.apple.com/library/prerelease/watchos/documentation/General/Conceptual/WatchKitProgrammingGuide/index.html) and in particular the [Watch App Architecture](https://developer.apple.com/library/prerelease/watchos/documentation/General/Conceptual/WatchKitProgrammingGuide/DesigningaWatchKitApp.html#//apple_ref/doc/uid/TP40014969-CH3-SW1) section is very helpful as it shows Watch Apps still have a WatchKit Extension but it now runs on the Apple Watch instead of the iPhone. In your WatchKit Extension you will use Apple's [Watch Connectivity Framework](https://developer.apple.com/library/prerelease/ios/documentation/WatchConnectivity/Reference/WatchConnectivity_framework/index.html) directly, while in your Titanium app you talk to the same framework via [Ti.WatchSession](https://appcelerator.github.io/appc-docs/latest/#!/api/Titanium.WatchSession).
+First, please make yourself familiar with the architecture of watchOS 2 and the difference with watchOS 1. Apple has an excellent [WatchKit Programming Guide](https://developer.apple.com/library/prerelease/watchos/documentation/General/Conceptual/WatchKitProgrammingGuide/index.html) and in particular the [Watch App Architecture](https://developer.apple.com/library/prerelease/watchos/documentation/General/Conceptual/WatchKitProgrammingGuide/DesigningaWatchKitApp.html#//apple_ref/doc/uid/TP40014969-CH3-SW1) section is very helpful as it shows Watch Apps still have a WatchKit Extension but it now runs on the Apple Watch instead of the iPhone. In your WatchKit Extension you will use Apple's [Watch Connectivity Framework](https://developer.apple.com/library/prerelease/ios/documentation/WatchConnectivity/Reference/WatchConnectivity_framework/index.html) directly, while in your Titanium app you talk to the same framework via [Ti.WatchSession](https://appcelerator.github.io/appc-docs/latest/#!/api/Titanium.WatchSession).
 
 ![architecture](https://developer.apple.com/library/prerelease/watchos/documentation/General/Conceptual/WatchKitProgrammingGuide/Art/architecture_compared_2x.png)
 
-## Adding a Watch App to your own Titanium App
+## Adding a Watch App to your Titanium App
 
 Use the CLI to create and add an Xcode project with Obj-C Watch App and Extension to an existing Titanium iOS App:
 
@@ -46,9 +46,9 @@ First of all, you'll need an iPhone [running iOS 9](https://developer.apple.com/
 
 Then open Xcode (*Window > Devices*) to lookup the UDID of your Apple Watch and make sure both your iPhone and Apple Watch are [registered](https://developer.apple.com/account/ios/device/deviceList.action?deviceClasses=watch) and added to the wildcard [provisioning profile](https://developer.apple.com/account/ios/profile/profileList.action?type=limited) you use for development. If it's managed by Xcode, I haven't found a way to have Xcode add the Watch so I just created a new provisioning profile for your wildcard App ID. Don't forget to download and open the updated provisioning profile or pull it in via Xcode (*Preferences > Accounts > View Details... > Download all*).
 
-Ultimately, you are probably going to use an Explicit App ID (so you can use *Push Notifications* etc.) and then you'll have to create these (and the related provisioning profiles) for both the Titanium App, the Watch App and Extension. Yes, three of them.. I know. But for this sample and development, just use a wildcard.
+Ultimately, you are probably going to use an Explicit App ID (so you can use *Push Notifications* etc.) and then you'll have to create these (and the related provisioning profiles) for both the Titanium App, the Watch App and Extension. Yes, three of them...I know. But for this sample and development, just use a wildcard.
 
-No we only need to set the UUID of the provisioning profiles in [tiapp.xml](tiapp.xml). Run `appc ti info -t ios` to verify you have installed them correctly, copy their UUID's and then add it to the targets under `ios/extensions`:
+Now we only need to set the UUID of the provisioning profiles in [tiapp.xml](tiapp.xml). Run `appc ti info -t ios` to verify you have installed them correctly, copy their UUID's and then add it to the targets under `ios/extensions`:
 
     <extensions>
       <extension projectPath="extensions/WatchOS2/WatchOS2.xcodeproj">
@@ -99,7 +99,7 @@ The related controller can be found in the Extension under [WatchOS2/WatchOS2 Wa
 
 #### Connecting to the Titanium App
 
-In the header I've imported `WatchConnectivity`, add `WCSessionDelegate`. I also declare properties I will use to keep track of the session and last received log and image, outlets form the Storyboard I use and the public methods te Storyboard uses.
+In the header I've imported `WatchConnectivity`, add `WCSessionDelegate`. I also declare properties I will use to keep track of the session and last received log and image, outlets form the Storyboard I use and the public methods the Storyboard uses.
 
 Then in `InterfaceController.m` I'll have to activate the Watch Session each time the Watch Extension activates. If you don't, it will not be able to communicate with the Titanium App. I activate the session in `willActivate`:
 
@@ -118,7 +118,7 @@ As you can see in the [full sample code](extensions/WatchOS2/WatchOS2 WatchApp E
 
 #### Sending to the Titanium App
 
-Under the `#pragma mark watch methods` you'll find the 4 methods that the 4 buttons in the UI call. They demonstrate the 4 methods of  [WCSession](https://developer.apple.com/library/prerelease/ios/documentation/WatchConnectivity/Reference/WCSession_class/index.html#//apple_ref/occ/cl/WCSession) to send a message (simple object to send right away), file, userInfo (simple object, queued to be send in background) or update the applicationContext (simple object, of which only the last one will be delivered when the Titanium App resumes).
+Under the `#pragma mark watch methods` you'll find the 4 methods that the 4 buttons in the UI call. They demonstrate the 4 methods of  [WCSession](https://developer.apple.com/library/prerelease/ios/documentation/WatchConnectivity/Reference/WCSession_class/index.html#//apple_ref/occ/cl/WCSession) to send a message (simple object to send right away), file, userInfo (simple object, queued to be sent in background) or update the applicationContext (simple object, of which only the last one will be delivered when the Titanium App resumes).
 
 	-(IBAction)transferFile:(id)sender
 	{
@@ -128,7 +128,7 @@ Under the `#pragma mark watch methods` you'll find the 4 methods that the 4 butt
 
 #### Receiving from the Titanium App
 
-Then under `#pragma mark watch delegates` we continue with the delegates that listen to events received from the Titanium App. As you can see there are also events to let us know if a file or userInfo was transferred successfully. All events are logged in the Watch App UI and received images are displayed as well.
+Then under `#pragma mark watch delegates` we continue with the delegates that listen to events received from the Titanium App. As you can see, there are also events to let us know if a file or userInfo was transferred successfully. All events are logged in the Watch App UI and received images are displayed as well.
 
 	- (void)session:(nonnull WCSession *)session didReceiveFile:(nonnull WCSessionFile *)file
 	{
@@ -146,7 +146,7 @@ In [app/controllers/watchsession.js](app/controllers/watchsession.js) you can se
 
 #### Sending to the Watch App
 
-The event listeners for the different buttons in the view demonstrate each of the methods to send files and information to the Watch App. As you can see there are also `cancel*` methods. They can only be tested if your Watch is out of reach or for some other reason data cannot be transferred to the Watch and is queued.
+The event listeners for the different buttons in the view demonstrate each of the methods to send files and information to the Watch App. As you can see, there are also `cancel*` methods. They can only be tested if your Watch is out of reach or for some other reason data cannot be transferred to the Watch and is queued.
 	
 	Ti.WatchSession.transferFile({
 		fileURL: '/docs/logo.png',
@@ -155,7 +155,7 @@ The event listeners for the different buttons in the view demonstrate each of th
 
 ## Final notes
 
-There's a lot more to do about Apple Watch apps. Checkout the *Links* section for more information after I close of with some final notes:
+There's a lot more about Apple Watch apps. Checkout the *Links* section for more information after I close of with some final notes:
 
 * You can change the Watch App's name later in Xcode via *WatchOS2 > Targets > WatchOS2 WatchApp > General > Identity > Display Name*.
 * You have to manage the icons for the Watch App yourself via the Xcode project's [asset catalog](extensions/WatchOS2/WatchOS2 WatchApp/Assets.xcassets/AppIcon.appiconset). You can use the [TiCons CLI]() or [Website](http://ticons.fokkezb.nl/) to generate these.
