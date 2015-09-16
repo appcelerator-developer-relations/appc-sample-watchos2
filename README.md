@@ -1,4 +1,4 @@
-# WatchSession
+# WatchSession Sample App
 *Communicating between a Titanium App and a Xcode watchOS 2 App.*
 
 Among lots of other enhancements, Titanium 5.0.0 adds support for bundling and communicating with an Xcode-built watchOS 2 app. I'll walk you through adding and launching a Watch app for your own Titanium apps and then use the example to explain how you can communicate between them.
