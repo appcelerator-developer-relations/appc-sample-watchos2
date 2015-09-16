@@ -6,6 +6,10 @@ var log = require('log');
  */
 (function constructor(args) {
 
+	if (!Ti.WatchSession) {
+		return alert('Your Titanium SDK version does not support WatchSession.');
+	}
+
 	// Required to be able to receive events from the watch
 	// The session will also automatically activate when you
 	// call methods or properties on Ti.WatchSession (except
