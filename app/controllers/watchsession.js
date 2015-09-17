@@ -6,8 +6,8 @@ var log = require('log');
  */
 (function constructor(args) {
 
-	if (!Ti.WatchSession) {
-		return alert('Your Titanium SDK version does not support WatchSession.');
+	if (Alloy.Globals.TI_VERSION < 5) {
+		return;
 	}
 
 	// Required to be able to receive events from the watch
