@@ -77,7 +77,7 @@ In Studio the Tiapp Editor has a *Configure Provisioning Profiles...* button to 
 
 Then build to device like normal, just make sure that you use the iOS 9 SDK and the same provisioning profile:
 
-	appc run -p ios -I 9.0 --target device --device-id ? --pp-uuid ?
+	appc run -p ios --target device --device-id ? --pp-uuid ?
 	
 You can either replace `?` with the exact values found via `appc ti info -t ios` or leave them there and unless you've set `appc ti config set cli.prompt false` the CLI will let you select from the found devices (`-C`) and profiles (`-P`).
 
