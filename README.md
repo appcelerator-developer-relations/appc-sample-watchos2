@@ -29,7 +29,7 @@ Here's how you run you Titanium App and its Watch App.
 ### Simulator
 To run both your Titanium App and its watchOS 2 app from the CLI:
 
-	appc run --platform ios --ios-version 9.0 --launch-watch-app
+	appc run --platform ios --launch-watch-app
 	
 While you still have Xcode 6 installed and selected, use `--ios-version` (`-I`) to select the iOS 9 SDK found in Xcode 7. The `--launch-watch-app` option will take care of launching the Watch App simulator, pairing it with the iOS Simulator and installing and launching your app.
 
@@ -77,7 +77,7 @@ In Studio the Tiapp Editor has a *Configure Provisioning Profiles...* button to 
 
 Then build to device like normal, just make sure that you use the iOS 9 SDK and the same provisioning profile:
 
-	appc run -p ios -I 9.0 --target device --device-id ? --pp-uuid ?
+	appc run -p ios --target device --device-id ? --pp-uuid ?
 	
 You can either replace `?` with the exact values found via `appc ti info -t ios` or leave them there and unless you've set `appc ti config set cli.prompt false` the CLI will let you select from the found devices (`-C`) and profiles (`-P`).
 
