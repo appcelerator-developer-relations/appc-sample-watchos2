@@ -164,7 +164,9 @@ function cancelAllUserInfoTransfers() {
  */
 function createSamplePayload() {
 	return {
-		foo: 'bar',
-		time: (new Date()).toString()
+		message: {
+			foo: 'bar',
+			time: (new Date()).toString()
+		}
 	};
 }
